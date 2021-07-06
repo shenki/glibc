@@ -6,6 +6,7 @@ ifeq ($(subdir),math)
 ifneq (yes,$(libc-submachine-power9))
 do_f128_multiarch = yes
 endif
+do_f128_multiarch = no
 
 #
 # This is an ugly, but contained, mechanism to provide hardware optimized

@@ -55,6 +55,8 @@ endif # ifeq ($(ibm128-fcts),yes)
 # GCC BZ 84914, and marked as will-not-fix.
 type-float128-CFLAGS += $(type-ldouble-CFLAGS)
 
+type-float128-CFLAGS =
+
 ifeq ($(subdir),math)
 # sqrtf128 requires emulation before POWER9.
 CPPFLAGS += -I../soft-fp

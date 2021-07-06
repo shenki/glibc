@@ -27,9 +27,9 @@ rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
 fi
 { $as_echo "$as_me:${as_lineno-$LINENO}: result: $libc_cv_target_power8_ok" >&5
 $as_echo "$libc_cv_target_power8_ok" >&6; }
-if test "$libc_cv_target_power8_ok" != "yes"; then :
-  critic_missing="$critic_missing POWER8 or newer is required on powerpc64le."
-fi
+#if test "$libc_cv_target_power8_ok" != "yes"; then :
+  #critic_missing="$critic_missing POWER8 or newer is required on powerpc64le."
+#fi
 CFLAGS="$OLD_CFLAGS"
 
 OLD_CFLAGS="$CFLAGS"
@@ -65,7 +65,7 @@ if ${libc_cv_compiler_powerpc64le_ice+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   save_CFLAGS="$CFLAGS"
-CFLAGS="$CFLAGS -mabi=ieeelongdouble -Wno-psabi"
+#CFLAGS="$CFLAGS -mabi=ieeelongdouble -Wno-psabi"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
@@ -96,7 +96,7 @@ if ${libc_cv_compiler_powerpc64le_ldbl128_mabi+:} false; then :
   $as_echo_n "(cached) " >&6
 else
   save_CFLAGS="$CFLAGS"
-CFLAGS="$CFLAGS -mabi=ieeelongdouble -mlong-double-128"
+#CFLAGS="$CFLAGS -mabi=ieeelongdouble -mlong-double-128"
 cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
 
