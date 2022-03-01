@@ -90,7 +90,7 @@ __syslog (int pri, const char *fmt, ...)
   __vsyslog_internal (pri, fmt, ap, 0);
   va_end (ap);
 }
-ldbl_hidden_def (__syslog, syslog)
+libc_hidden_def (__syslog)
 ldbl_strong_alias (__syslog, syslog)
 
 void
@@ -131,7 +131,7 @@ __vsyslog_internal (int pri, const char *fmt, va_list ap,
   /* Check for invalid bits. */
   if (pri & ~(LOG_PRIMASK | LOG_FACMASK))
     {
-      syslog (INTERNALLOG, "syslog: unknown facility/priority: %x", pri);
+      __syslog (INTERNALLOG, "syslog: unknown facility/priority: %x", pri);
       pri &= LOG_PRIMASK | LOG_FACMASK;
     }
 
