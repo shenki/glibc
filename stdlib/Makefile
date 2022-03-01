@@ -26,7 +26,6 @@ headers := \
   alloca.h \
   bits/errno.h \
   bits/indirect-return.h \
-  bits/monetary-ldbl.h \
   bits/stdint-intn.h \
   bits/stdint-uintn.h \
   bits/stdlib-bsearch.h \
