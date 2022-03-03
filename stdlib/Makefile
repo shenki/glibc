@@ -31,7 +31,6 @@ headers := \
   bits/stdlib-bsearch.h \
   bits/stdlib-float.h \
   bits/stdlib.h \
-  bits/stdlib-ldbl.h \
   bits/time64.h \
   bits/timesize.h \
   bits/types/error_t.h \
