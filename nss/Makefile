@@ -79,6 +79,7 @@ tests += tst-nss-files-hosts-multi
 tests += tst-nss-files-hosts-getent
 tests += tst-nss-files-alias-leak
 tests += tst-nss-files-alias-truncated
+tests += tst-nss-gai-actions
 endif
 
 # If we have a thread library then we can test cancellation against
