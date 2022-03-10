@@ -86,7 +86,7 @@ __gai_start_notify_thread (void)
   assert_perror (sigerr);
 }
 
-extern inline int
+static inline int
 __gai_create_helper_thread (pthread_t *threadp, void *(*tf) (void *),
 			    void *arg)
 {
