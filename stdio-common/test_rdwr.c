@@ -60,13 +60,13 @@ main (int argc, char **argv)
 	int c = getc (f);
 	if (c == EOF)
 	  {
-	    printf ("EOF at %Zu.\n", i);
+	    printf ("EOF at %zu.\n", i);
 	    lose = 1;
 	    break;
 	  }
 	else if (c != hello[i])
 	  {
-	    printf ("Got '%c' instead of '%c' at %Zu.\n",
+	    printf ("Got '%c' instead of '%c' at %zu.\n",
 		    (unsigned char) c, hello[i], i);
 	    lose = 1;
 	    break;
@@ -82,7 +82,7 @@ main (int argc, char **argv)
 	for (i = replace_from; i < replace_to; ++i)
 	  if (putc(replace[i], f) == EOF)
 	    {
-	      printf ("putc('%c') got %s at %Zu.\n",
+	      printf ("putc('%c') got %s at %zu.\n",
 		      replace[i], strerror (errno), i);
 	      lose = 1;
 	      break;
@@ -90,13 +90,13 @@ main (int argc, char **argv)
       }
     else if (where == -1L)
       {
-	printf ("ftell got %s (should be at %Zu).\n",
+	printf ("ftell got %s (should be at %zu).\n",
 		strerror (errno), replace_from);
 	lose = 1;
       }
     else
       {
-	printf ("ftell returns %lu; should be %Zu.\n", where, replace_from);
+	printf ("ftell returns %lu; should be %zu.\n", where, replace_from);
 	lose = 1;
       }
   }

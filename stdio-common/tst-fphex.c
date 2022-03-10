@@ -56,8 +56,8 @@ do_test (void)
       int n = SPRINT (buf, array_length (buf), t->fmt, t->value);
       if (n != STR_LEN (t->expect) || STR_CMP (buf, t->expect) != 0)
 	{
-	  PRINT (L_("" S "\tExpected \"" S "\" (%Zu)\n\tGot      \""
-		    S "\" (%d, %Zu)\n"),
+	  PRINT (L_("" S "\tExpected \"" S "\" (%zu)\n\tGot      \""
+		    S "\" (%d, %zu)\n"),
 		 t->fmt, t->expect, STR_LEN (t->expect),
 		 buf, n, STR_LEN (buf));
 	  result = 1;

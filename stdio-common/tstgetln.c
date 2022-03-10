@@ -26,7 +26,7 @@ main (int argc, char *argv[])
 
   while ((len = getline (&buf, &size, stdin)) != -1)
     {
-      printf ("bufsize %Zu; read %Zd: ", size, len);
+      printf ("bufsize %zu; read %zd: ", size, len);
       if (fwrite (buf, len, 1, stdout) != 1)
 	{
 	  perror ("fwrite");

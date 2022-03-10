@@ -28,7 +28,7 @@ main (void)
       return 1;
     }
   for (i = 0; i < 1000; ++i)
-    fprintf (in, "%Zu\n", i);
+    fprintf (in, "%zu\n", i);
 
   out = fopen (outname, "w");
   if (out == NULL)
