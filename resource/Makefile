@@ -28,3 +28,5 @@ routines := getrlimit setrlimit getrlimit64 setrlimit64 getrusage ulimit      \
 tests = tst-getrlimit bug-ulimit1
 
 include ../Rules
+
+CFLAGS-getrlimit64.c += $(config-cflags-wno-ignored-attributes)

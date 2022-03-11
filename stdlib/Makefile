@@ -366,6 +366,14 @@ CFLAGS-strfromd.c += $(libio-mtsafe)
 CFLAGS-strfromf.c += $(libio-mtsafe)
 CFLAGS-strfroml.c += $(libio-mtsafe)
 
+CFLAGS-strtof.c += $(config-cflags-wno-ignored-attributes)
+CFLAGS-strtof_l.c += $(config-cflags-wno-ignored-attributes)
+CFLAGS-strtod.c += $(config-cflags-wno-ignored-attributes)
+CFLAGS-strtod_l.c += $(config-cflags-wno-ignored-attributes)
+CFLAGS-strtold.c += $(config-cflags-wno-ignored-attributes)
+CFLAGS-strtold_l.c += $(config-cflags-wno-ignored-attributes)
+CFLAGS-secure-getenv.c += $(config-cflags-wno-ignored-attributes)
+
 CFLAGS-tst-bsearch.c += $(stack-align-test-flags)
 CFLAGS-tst-qsort.c += $(stack-align-test-flags)
 CFLAGS-tst-makecontext.c += -funwind-tables
