@@ -42,6 +42,7 @@
 #ifdef _LIBC
 # include <wchar.h>
 # include <libio/libioP.h>
+# define putc_unlocked(__c, __f) __putc_unlocked (__c, __f)
 #endif
 
 #define INIT_BUF_SIZE 200

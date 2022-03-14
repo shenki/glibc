@@ -57,7 +57,7 @@ putsgent (const struct sgrp *g, FILE *stream)
 	  }
 	first = false;
       }
-  if (putc_unlocked (':', stream) == EOF)
+  if (__putc_unlocked (':', stream) == EOF)
     ++errors;
 
   first = true;
@@ -72,7 +72,7 @@ putsgent (const struct sgrp *g, FILE *stream)
 	  }
 	first = false;
       }
-  if (putc_unlocked ('\n', stream) == EOF)
+  if (__putc_unlocked ('\n', stream) == EOF)
     ++errors;
 
   _IO_funlockfile (stream);

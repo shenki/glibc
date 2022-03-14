@@ -242,7 +242,7 @@ __wuflow (FILE *fp)
 	return WEOF;
     }
   else if (_IO_have_wbackup (fp))
-    _IO_free_wbackup_area (fp);
+    __libc_IO_free_wbackup_area (fp);
   return _IO_UFLOW (fp);
 }
 libc_hidden_def (__wuflow)
@@ -272,7 +272,7 @@ __wunderflow (FILE *fp)
 	return WEOF;
     }
   else if (_IO_have_backup (fp))
-    _IO_free_wbackup_area (fp);
+    __libc_IO_free_wbackup_area (fp);
   return _IO_UNDERFLOW (fp);
 }
 libc_hidden_def (__wunderflow)
@@ -412,7 +412,7 @@ _IO_switch_to_wget_mode (FILE *fp)
 libc_hidden_def (_IO_switch_to_wget_mode)
 
 void
-_IO_free_wbackup_area (FILE *fp)
+__libc_IO_free_wbackup_area (FILE *fp)
 {
   if (_IO_in_backup (fp))
     _IO_switch_to_main_wget_area (fp);  /* Just in case. */
@@ -421,7 +421,8 @@ _IO_free_wbackup_area (FILE *fp)
   fp->_wide_data->_IO_save_end = NULL;
   fp->_wide_data->_IO_backup_base = NULL;
 }
-libc_hidden_def (_IO_free_wbackup_area)
+libc_hidden_def (__libc_IO_free_wbackup_area)
+strong_alias (__libc_IO_free_wbackup_area, _IO_free_wbackup_area)
 
 static int
 save_for_wbackup (FILE *fp, wchar_t *end_p)
@@ -605,5 +606,5 @@ _IO_unsave_wmarkers (FILE *fp)
     }
 
   if (_IO_have_backup (fp))
-    _IO_free_wbackup_area (fp);
+    __libc_IO_free_wbackup_area (fp);
 }

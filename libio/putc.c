@@ -32,7 +32,6 @@ _IO_putc (int c, FILE *fp)
   _IO_release_lock (fp);
   return result;
 }
-libc_hidden_def (_IO_putc)
 
 #undef putc
 

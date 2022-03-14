@@ -691,7 +691,7 @@ _IO_old_file_xsputn (FILE *f, const void *data, size_t n)
     {
       size_t block_size, do_write;
       /* Next flush the (full) buffer. */
-      if (__overflow (f, EOF) == EOF)
+      if (__libc_overflow (f, EOF) == EOF)
 	return to_do == 0 ? EOF : n - to_do;
 
       /* Try to maintain alignment: write a whole number of blocks.

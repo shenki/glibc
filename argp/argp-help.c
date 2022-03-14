@@ -51,6 +51,7 @@ char *alloca ();
 #ifdef _LIBC
 # include <../libio/libioP.h>
 # include <wchar.h>
+# define putc_unlocked(__c, __f) __putc_unlocked (__c, __f)
 #endif
 
 #ifndef _

@@ -195,14 +195,15 @@ _IO_free_backup_area (FILE *fp)
 libc_hidden_def (_IO_free_backup_area)
 
 int
-__overflow (FILE *f, int ch)
+__libc_overflow (FILE *f, int ch)
 {
   /* This is a single-byte stream.  */
   if (f->_mode == 0)
     _IO_fwide (f, -1);
   return _IO_OVERFLOW (f, ch);
 }
-libc_hidden_def (__overflow)
+libc_hidden_def (__libc_overflow)
+strong_alias (__libc_overflow, __overflow)
 
 static int
 save_for_backup (FILE *fp, char *end_p)
@@ -265,7 +266,7 @@ save_for_backup (FILE *fp, char *end_p)
 }
 
 int
-__underflow (FILE *fp)
+__libc_underflow (FILE *fp)
 {
   if (_IO_vtable_offset (fp) == 0 && _IO_fwide (fp, -1) != -1)
     return EOF;
@@ -292,10 +293,11 @@ __underflow (FILE *fp)
     _IO_free_backup_area (fp);
   return _IO_UNDERFLOW (fp);
 }
-libc_hidden_def (__underflow)
+libc_hidden_def (__libc_underflow)
+strong_alias (__libc_underflow, __underflow)
 
 int
-__uflow (FILE *fp)
+__libc_uflow (FILE *fp)
 {
   if (_IO_vtable_offset (fp) == 0 && _IO_fwide (fp, -1) != -1)
     return EOF;
@@ -322,7 +324,8 @@ __uflow (FILE *fp)
     _IO_free_backup_area (fp);
   return _IO_UFLOW (fp);
 }
-libc_hidden_def (__uflow)
+libc_hidden_def (__libc_uflow)
+strong_alias (__libc_uflow, __uflow)
 
 void
 _IO_setb (FILE *f, char *b, char *eb, int a)
@@ -440,7 +443,7 @@ _IO_default_xsgetn (FILE *fp, void *data, size_t n)
 	    }
 	    more -= count;
 	}
-      if (more == 0 || __underflow (fp) == EOF)
+      if (more == 0 || __libc_underflow (fp) == EOF)
 	break;
     }
   return n - more;

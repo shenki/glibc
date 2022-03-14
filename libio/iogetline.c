@@ -57,7 +57,7 @@ _IO_getline_info (FILE *fp, char *buf, size_t n, int delim,
       ssize_t len = fp->_IO_read_end - fp->_IO_read_ptr;
       if (len <= 0)
 	{
-	  int c = __uflow (fp);
+	  int c = __libc_uflow (fp);
 	  if (c == EOF)
 	    {
 	      if (eof)

@@ -219,24 +219,24 @@ token (void)
 
 	if (feof_unlocked(cfile) || ferror_unlocked(cfile))
 		return (0);
-	while ((c = getc_unlocked(cfile)) != EOF &&
+	while ((c = __getc_unlocked(cfile)) != EOF &&
 	    (c == '\n' || c == '\t' || c == ' ' || c == ','))
 		continue;
 	if (c == EOF)
 		return (0);
 	cp = tokval;
 	if (c == '"') {
-		while ((c = getc_unlocked(cfile)) != EOF && c != '"') {
+		while ((c = __getc_unlocked(cfile)) != EOF && c != '"') {
 			if (c == '\\')
-				c = getc_unlocked(cfile);
+				c = __getc_unlocked(cfile);
 			*cp++ = c;
 		}
 	} else {
 		*cp++ = c;
-		while ((c = getc_unlocked(cfile)) != EOF
+		while ((c = __getc_unlocked(cfile)) != EOF
 		    && c != '\n' && c != '\t' && c != ' ' && c != ',') {
 			if (c == '\\')
-				c = getc_unlocked(cfile);
+				c = __getc_unlocked(cfile);
 			*cp++ = c;
 		}
 	}

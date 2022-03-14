@@ -40,7 +40,7 @@ _IO_seekpos_unlocked (FILE *fp, off64_t pos, int mode)
   else
     {
       if (_IO_have_wbackup (fp))
-	_IO_free_wbackup_area (fp);
+	__libc_IO_free_wbackup_area (fp);
     }
 
   return _IO_SEEKOFF (fp, pos, 0, mode);

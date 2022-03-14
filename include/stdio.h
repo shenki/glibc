@@ -275,13 +275,19 @@ __ferror_unlocked (FILE *__stream)
 static inline int
 __getc_unlocked (FILE *__fp)
 {
-  return __getc_unlocked_body (__fp);
+  return _IO_getc_unlocked (__fp);
 }
 
 static inline int
 __putc_unlocked (int __c, FILE *__stream)
 {
-  return __putc_unlocked_body (__c, __stream);
+  return _IO_putc_unlocked (__c, __stream);
+}
+
+static inline int
+__fputc_unlocked (int __c, FILE *__stream)
+{
+  return _IO_putc_unlocked (__c, __stream);
 }
 
 extern __typeof (renameat) __renameat;

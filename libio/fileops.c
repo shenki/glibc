@@ -145,7 +145,7 @@ _IO_new_file_close_it (FILE *fp)
   if (fp->_mode > 0)
     {
       if (_IO_have_wbackup (fp))
-	_IO_free_wbackup_area (fp);
+	__libc_IO_free_wbackup_area (fp);
       _IO_wsetb (fp, NULL, NULL, 0);
       _IO_wsetg (fp, NULL, NULL, NULL);
       _IO_wsetp (fp, NULL, NULL);
@@ -1318,7 +1318,7 @@ _IO_file_xsgetn (FILE *fp, void *data, size_t n)
 	  if (fp->_IO_buf_base
 	      && want < (size_t) (fp->_IO_buf_end - fp->_IO_buf_base))
 	    {
-	      if (__underflow (fp) == EOF)
+	      if (__libc_underflow (fp) == EOF)
 		break;
 
 	      continue;

@@ -68,7 +68,7 @@ putgrent (const struct group *gr, FILE *stream)
 	  }
     }
 
-  retval = fputc_unlocked ('\n', stream);
+  retval = __fputc_unlocked ('\n', stream);
 
   funlockfile (stream);
 

@@ -53,7 +53,7 @@ _IO_seekoff_unlocked (FILE *fp, off64_t offset, int dir, int mode)
       if (_IO_fwide (fp, 0) < 0)
 	_IO_free_backup_area (fp);
       else
-	_IO_free_wbackup_area (fp);
+	__libc_IO_free_wbackup_area (fp);
     }
 
   return _IO_SEEKOFF (fp, offset, dir, mode);

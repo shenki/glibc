@@ -70,7 +70,7 @@ __libc_getdelim (char **lineptr, size_t *n, int delimiter, FILE *fp)
   len = fp->_IO_read_end - fp->_IO_read_ptr;
   if (len <= 0)
     {
-      if (__underflow (fp) == EOF)
+      if (__libc_underflow (fp) == EOF)
 	{
 	  result = -1;
 	  goto unlock_return;
@@ -111,7 +111,7 @@ __libc_getdelim (char **lineptr, size_t *n, int delimiter, FILE *fp)
       memcpy (*lineptr + cur_len, (void *) fp->_IO_read_ptr, len);
       fp->_IO_read_ptr += len;
       cur_len += len;
-      if (t != NULL || __underflow (fp) == EOF)
+      if (t != NULL || __libc_underflow (fp) == EOF)
 	break;
       len = fp->_IO_read_end - fp->_IO_read_ptr;
     }

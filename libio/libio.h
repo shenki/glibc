@@ -156,17 +156,27 @@ extern void _IO_cookie_init (struct _IO_cookie_file *__cfile, int __read_write,
 			     void *__cookie, cookie_io_functions_t __fns);
 
 extern int __underflow (FILE *);
-extern wint_t __wunderflow (FILE *);
-extern wint_t __wuflow (FILE *);
-extern wint_t __woverflow (FILE *, wint_t);
+hidden_proto2 (__underflow, __libc_underflow)
+extern wint_t hidden_proto3 (__wunderflow, (FILE *));
+extern wint_t hidden_proto3 (__wuflow, (FILE *));
+extern wint_t hidden_proto3 (__woverflow, (FILE *, wint_t));
 
-#define _IO_getc_unlocked(_fp) __getc_unlocked_body (_fp)
+hidden_proto2 (__overflow, __libc_overflow)
+hidden_proto2 (__uflow, __libc_uflow)
+
+#define _IO_getc_unlocked(_fp)						\
+  (__glibc_unlikely ((_fp)->_IO_read_ptr >= (_fp)->_IO_read_end)        \
+   ? __libc_uflow (_fp) : *(unsigned char *) (_fp)->_IO_read_ptr++)
+
 #define _IO_peekc_unlocked(_fp)						\
   (__glibc_unlikely ((_fp)->_IO_read_ptr >= (_fp)->_IO_read_end)	\
-   && __underflow (_fp) == EOF						\
+   && __libc_underflow (_fp) == EOF						\
    ? EOF								\
    : *(unsigned char *) (_fp)->_IO_read_ptr)
-#define _IO_putc_unlocked(_ch, _fp) __putc_unlocked_body (_ch, _fp)
+#define _IO_putc_unlocked(_ch, _fp)					\
+  (__glibc_unlikely ((_fp)->_IO_write_ptr >= (_fp)->_IO_write_end)	\
+      ? __libc_overflow (_fp, (unsigned char) (_ch))			\
+         : (unsigned char) (*(_fp)->_IO_write_ptr++ = (_ch)))
 
 # define _IO_getwc_unlocked(_fp)					\
   (__glibc_unlikely ((_fp)->_wide_data == NULL				\
@@ -214,13 +224,13 @@ extern int _IO_ftrylockfile (FILE *) __THROW;
 
 extern int _IO_vfscanf (FILE * __restrict, const char * __restrict,
 			__gnuc_va_list, int *__restrict);
-extern __ssize_t _IO_padn (FILE *, int, __ssize_t);
-extern size_t _IO_sgetn (FILE *, void *, size_t);
+extern __ssize_t hidden_proto3 (_IO_padn, (FILE *, int, __ssize_t));
+extern size_t hidden_proto3 (_IO_sgetn, (FILE *, void *, size_t));
 
 extern off64_t _IO_seekoff (FILE *, off64_t, int, int);
 extern off64_t _IO_seekpos (FILE *, off64_t, int);
 
-extern void _IO_free_backup_area (FILE *) __THROW;
+extern void hidden_proto3 (_IO_free_backup_area, (FILE *)) __THROW;
 
 
 extern wint_t _IO_getwc (FILE *__fp);
@@ -255,24 +265,13 @@ weak_extern (_IO_stdin_used);
 
 extern __ssize_t _IO_wpadn (FILE *, wint_t, __ssize_t);
 extern void _IO_free_wbackup_area (FILE *) __THROW;
+hidden_proto2 (_IO_free_wbackup_area, __libc_IO_free_wbackup_area)
 
 #ifdef __LDBL_COMPAT
 extern int __REDIRECT_LDBL_COMPAT (_IO_vfscanf, (FILE * __restrict,
 						 const char * __restrict,
 						 __gnuc_va_list, int *__restrict));
 #endif
-
-libc_hidden_proto (__overflow)
-libc_hidden_proto (__underflow)
-libc_hidden_proto (__uflow)
-libc_hidden_proto (__woverflow)
-libc_hidden_proto (__wunderflow)
-libc_hidden_proto (__wuflow)
-libc_hidden_proto (_IO_free_backup_area)
-libc_hidden_proto (_IO_free_wbackup_area)
-libc_hidden_proto (_IO_padn)
-libc_hidden_proto (_IO_putc)
-libc_hidden_proto (_IO_sgetn)
 
 #ifdef _IO_MTSAFE_IO
 # undef _IO_peekc
