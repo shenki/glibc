@@ -37,7 +37,7 @@
    null terminator), or -1 on error or EOF.  */
 
 ssize_t
-__getdelim (char **lineptr, size_t *n, int delimiter, FILE *fp)
+__libc_getdelim (char **lineptr, size_t *n, int delimiter, FILE *fp)
 {
   ssize_t result;
   ssize_t cur_len = 0;
@@ -122,5 +122,6 @@ unlock_return:
   _IO_release_lock (fp);
   return result;
 }
-libc_hidden_def (__getdelim)
+libc_hidden_def (__libc_getdelim)
+strong_alias (__libc_getdelim, __getdelim)
 weak_alias (__getdelim, getdelim)

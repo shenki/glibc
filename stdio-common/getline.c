@@ -25,7 +25,7 @@
 ssize_t
 __getline (char **lineptr, size_t *n, FILE *stream)
 {
-  return __getdelim (lineptr, n, '\n', stream);
+  return __libc_getdelim (lineptr, n, '\n', stream);
 }
 
 weak_alias (__getline, getline)

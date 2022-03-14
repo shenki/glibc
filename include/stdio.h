@@ -212,7 +212,8 @@ stdio_hidden_ldbl_proto (fprintf);
 stdio_hidden_ldbl_proto (vfprintf);
 stdio_hidden_ldbl_proto (sprintf);
 libc_hidden_proto (ungetc)
-libc_hidden_proto (__getdelim)
+__typeof (getdelim) __libc_getdelim;
+hidden_proto2 (getdelim, __libc_getdelim);
 libc_hidden_proto (fwrite)
 libc_hidden_proto (perror)
 libc_hidden_proto (remove)
