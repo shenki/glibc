@@ -243,8 +243,7 @@ libc_hidden_proto (fputs_unlocked)
 extern __typeof (fputs_unlocked) __fputs_unlocked;
 libc_hidden_proto (__fputs_unlocked)
 extern __typeof (feof_unlocked) __libc_feof_unlocked;
-libc_hidden_proto (ferror_unlocked)
-extern __typeof (ferror_unlocked) __ferror_unlocked attribute_hidden;
+extern __typeof (ferror_unlocked) __libc_ferror_unlocked;
 libc_hidden_proto (getc_unlocked)
 libc_hidden_proto (fputc_unlocked)
 libc_hidden_proto (putc_unlocked)
@@ -270,13 +269,13 @@ __feof_unlocked (FILE *__stream)
   return __feof_unlocked_body (__stream);
 }
 
-#  ifdef __USE_EXTERN_INLINES
-__extern_inline int
-__NTH (__ferror_unlocked (FILE *__stream))
+static inline int
+__ferror_unlocked (FILE *__stream)
 {
   return __ferror_unlocked_body (__stream);
 }
 
+#  ifdef __USE_EXTERN_INLINES
 __extern_inline int
 __getc_unlocked (FILE *__fp)
 {
