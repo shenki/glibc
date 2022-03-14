@@ -21,10 +21,9 @@
 #undef putc_unlocked
 
 int
-__putc_unlocked (int c, FILE *fp)
+__libc_putc_unlocked (int c, FILE *fp)
 {
   CHECK_FILE (fp, EOF);
   return _IO_putc_unlocked (c, fp);
 }
-weak_alias (__putc_unlocked, putc_unlocked)
-libc_hidden_weak (putc_unlocked)
+weak_alias (__libc_putc_unlocked, putc_unlocked)

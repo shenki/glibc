@@ -169,7 +169,6 @@ extern void __funlockfile (FILE *__stream) attribute_hidden;
    possible.  */
 extern int __ftrylockfile (FILE *__stream);
 
-extern int __getc_unlocked (FILE *__fp) attribute_hidden;
 extern wint_t __getwc_unlocked (FILE *__fp);
 
 extern int __fxprintf (FILE *__fp, const char *__fmt, ...)
@@ -244,10 +243,8 @@ extern __typeof (fputs_unlocked) __fputs_unlocked;
 libc_hidden_proto (__fputs_unlocked)
 extern __typeof (feof_unlocked) __libc_feof_unlocked;
 extern __typeof (ferror_unlocked) __libc_ferror_unlocked;
-libc_hidden_proto (getc_unlocked)
-libc_hidden_proto (fputc_unlocked)
-libc_hidden_proto (putc_unlocked)
-extern __typeof (putc_unlocked) __putc_unlocked attribute_hidden;
+extern __typeof (getc_unlocked) __libc_getc_unlocked;
+extern __typeof (putc_unlocked) __libc_putc_unlocked;
 libc_hidden_proto (fmemopen)
 /* The prototype needs repeating instead of using __typeof to use
    __THROW in C++ tests.  */
@@ -275,19 +272,17 @@ __ferror_unlocked (FILE *__stream)
   return __ferror_unlocked_body (__stream);
 }
 
-#  ifdef __USE_EXTERN_INLINES
-__extern_inline int
+static inline int
 __getc_unlocked (FILE *__fp)
 {
   return __getc_unlocked_body (__fp);
 }
 
-__extern_inline int
+static inline int
 __putc_unlocked (int __c, FILE *__stream)
 {
   return __putc_unlocked_body (__c, __stream);
 }
-#  endif
 
 extern __typeof (renameat) __renameat;
 libc_hidden_proto (__renameat)

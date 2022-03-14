@@ -30,12 +30,11 @@
 #undef getc_unlocked
 
 int
-__getc_unlocked (FILE *fp)
+__libc_getc_unlocked (FILE *fp)
 {
   CHECK_FILE (fp, EOF);
   return _IO_getc_unlocked (fp);
 }
 
-weak_alias (__getc_unlocked, getc_unlocked)
-libc_hidden_weak (getc_unlocked)
-weak_alias (__getc_unlocked, fgetc_unlocked)
+weak_alias (__libc_getc_unlocked, getc_unlocked)
+weak_alias (__libc_getc_unlocked, fgetc_unlocked)
