@@ -40,7 +40,6 @@ libc_hidden_proto (abort)
 libc_hidden_proto (getenv)
 extern __typeof (secure_getenv) __libc_secure_getenv;
 libc_hidden_proto (__libc_secure_getenv)
-libc_hidden_proto (bsearch)
 libc_hidden_proto (qsort)
 extern __typeof (qsort_r) __qsort_r;
 libc_hidden_proto (__qsort_r)
@@ -237,8 +236,6 @@ extern __typeof (strtoul) __strtoul;
 libc_hidden_proto (__strtoul)
 extern __typeof (strtoull) __strtoull;
 libc_hidden_proto (__strtoull)
-
-libc_hidden_proto (atoi)
 
 extern float __strtof_nan (const char *, char **, char);
 extern double __strtod_nan (const char *, char **, char);

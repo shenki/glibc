@@ -26,4 +26,3 @@ atoi (const char *nptr)
 {
   return (int) __strtol (nptr, (char **) NULL, 10);
 }
-libc_hidden_def (atoi)
