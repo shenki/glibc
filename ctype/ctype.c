@@ -41,15 +41,15 @@ func (isxdigit, _ISxdigit)
   ((int32_t *) _NL_CURRENT (LC_CTYPE, _NL_CTYPE_TOUPPER) + 128)
 
 int
-tolower (int c)
+__tolower (int c)
 {
   return c >= -128 && c < 256 ? __ctype_tolower[c] : c;
 }
-libc_hidden_def (tolower)
+weak_alias (__tolower, tolower)
 
 int
-toupper (int c)
+__toupper (int c)
 {
   return c >= -128 && c < 256 ? __ctype_toupper[c] : c;
 }
-libc_hidden_def (toupper)
+weak_alias (__toupper, toupper)
