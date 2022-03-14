@@ -30,10 +30,9 @@
 #undef feof_unlocked
 
 int
-__feof_unlocked (FILE *fp)
+__libc_feof_unlocked (FILE *fp)
 {
   CHECK_FILE (fp, EOF);
   return _IO_feof_unlocked (fp);
 }
-weak_alias (__feof_unlocked, feof_unlocked)
-libc_hidden_weak (feof_unlocked)
+weak_alias (__libc_feof_unlocked, feof_unlocked)
