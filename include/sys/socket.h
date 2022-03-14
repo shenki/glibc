@@ -169,8 +169,6 @@ libc_hidden_proto (__libc_sa_len)
 # define SA_LEN(_x)      __libc_sa_len((_x)->sa_family)
 #endif
 
-libc_hidden_proto (__cmsg_nxthdr)
-
 #ifndef __ASSUME_TIME64_SYSCALLS
 extern void __convert_scm_timestamps (struct msghdr *msg, socklen_t msgsize)
      attribute_hidden;
