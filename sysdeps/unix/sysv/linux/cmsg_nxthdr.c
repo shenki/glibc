@@ -21,7 +21,7 @@
 
 
 struct cmsghdr *
-__cmsg_nxthdr (struct msghdr *mhdr, struct cmsghdr *cmsg)
+__libc_cmsg_nxthdr (struct msghdr *mhdr, struct cmsghdr *cmsg)
 {
   if ((size_t) cmsg->cmsg_len < sizeof (struct cmsghdr))
     /* The kernel header does this so there may be a reason.  */
@@ -37,3 +37,5 @@ __cmsg_nxthdr (struct msghdr *mhdr, struct cmsghdr *cmsg)
     return NULL;
   return cmsg;
 }
+libc_hidden_def (__libc_cmsg_nxthdr)
+strong_alias (__libc_cmsg_nxthdr, __cmsg_nxthdr);

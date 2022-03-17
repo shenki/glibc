@@ -174,5 +174,9 @@ extern void __convert_scm_timestamps (struct msghdr *msg, socklen_t msgsize)
      attribute_hidden;
 #endif
 
+#undef CMSG_NXTHDR
+#define CMSG_NXTHDR(mhdr, cmsg) __libc_cmsg_nxthdr (mhdr, cmsg)
+hidden_proto2 (__cmsg_nxthdr, __libc_cmsg_nxthdr)
+
 #endif
 #endif
