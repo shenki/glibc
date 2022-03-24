@@ -703,4 +703,11 @@ _Static_assert (0, "Compat long double requires redirection on this platform");
 # define __attribute_returns_twice__ /* Ignore.  */
 #endif
 
+/*  Prevents a function from being considered for cloning.  */
+#if __GNUC_PREREQ (4, 5) || __glibc_has_attribute (__noclone__)
+# define __attribute_noclone__ __attribute__ ((__noclone__))
+#else
+# define __attribute_noclone__ /* Ignore.  */
+#endif
+
 #endif	 /* sys/cdefs.h */
