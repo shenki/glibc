@@ -17,9 +17,9 @@
    License along with the GNU C Library.  If not, see
    <https://www.gnu.org/licenses/>.  */
 
-	.variant_pcs	vpcs_call
 	.global	vpcs_call
 	.type	vpcs_call, %function
+	.variant_pcs	vpcs_call
 vpcs_call:
 	.cfi_startproc
 	hint	34 /* bti c.  */
