@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <malloc.h>
 
-int
-main (void)
+static int
+do_test (void)
 {
 #ifdef M_PERTURB
   mallopt (M_PERTURB, 0xaa);
@@ -46,3 +46,5 @@ main (void)
   dlclose (h);
   return 0;
 }
+
+#include <support/test-driver.c>
