@@ -1619,6 +1619,23 @@ LIBC_TRY_CC_OPTION([-Werror -finput-charset=ascii],
 LIBC_CONFIG_VAR([config-cflags-charset-ascii],
 		[$libc_cv_cc_charset_ascii])
 
+dnl Check if compiler supports %gnu_unique_object
+AC_CACHE_CHECK([if $CC supports gnu_unique_object], libc_cv_cc_gnu_unique_object, [dnl
+cat > conftest.S <<EOF
+.type foo, %gnu_unique_object;
+.globl foo;
+foo:
+EOF
+libc_cv_cc_gnu_unique_object=no
+if ${CC-cc} $CFLAGS $CPPFLAGS -c conftest.S 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD;
+then
+  LC_ALL=C $READELF -s conftest.o | grep -q 'UNIQUE' && { libc_cv_cc_gnu_unique_object=yes
+  }
+fi
+rm -rf conftest*])
+LIBC_CONFIG_VAR([config-gnu-unique-object],
+		[$libc_cv_cc_gnu_unique_object])
+
 dnl Check whether we have the gd library available.
 AC_MSG_CHECKING(for libgd)
 if test "$with_gd" != "no"; then

@@ -6649,6 +6649,29 @@ $as_echo "$libc_cv_cc_charset_ascii" >&6; }
 config_vars="$config_vars
 config-cflags-charset-ascii = $libc_cv_cc_charset_ascii"
 
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if $CC supports gnu_unique_object" >&5
+$as_echo_n "checking if $CC supports gnu_unique_object... " >&6; }
+if ${libc_cv_cc_gnu_unique_object+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+  cat > conftest.S <<EOF
+.type foo, %gnu_unique_object;
+.globl foo;
+foo:
+EOF
+libc_cv_cc_gnu_unique_object=no
+if ${CC-cc} $CFLAGS $CPPFLAGS -c conftest.S 1>&5 2>&5;
+then
+  LC_ALL=C $READELF -s conftest.o | grep -q 'UNIQUE' && { libc_cv_cc_gnu_unique_object=yes
+  }
+fi
+rm -rf conftest*
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $libc_cv_cc_gnu_unique_object" >&5
+$as_echo "$libc_cv_cc_gnu_unique_object" >&6; }
+config_vars="$config_vars
+config-gnu-unique-object = $libc_cv_cc_gnu_unique_object"
+
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for libgd" >&5
 $as_echo_n "checking for libgd... " >&6; }
 if test "$with_gd" != "no"; then
