@@ -424,3 +424,4 @@ END(MEMSET_NAME)
 libc_hidden_builtin_def (MEMSET_NAME)
 # endif
 #endif
+strong_alias(MEMSET_NAME, __memset_generic)

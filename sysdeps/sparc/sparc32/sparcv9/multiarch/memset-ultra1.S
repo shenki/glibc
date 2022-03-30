@@ -27,3 +27,4 @@
 # define memset  __memset_ultra1
 # include <sysdeps/sparc/sparc32/sparcv9/memset.S>
 #endif
+strong_alias (__memset_ultra1, __memset_generic)

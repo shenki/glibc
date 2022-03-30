@@ -96,3 +96,4 @@ END (memset)
 
 libc_hidden_builtin_def (memset)
 .weak memset
+strong_alias (memset, __memset_generic)

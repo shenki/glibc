@@ -39,3 +39,4 @@
 #endif
 
 #include <sysdeps/powerpc/powerpc32/power4/memset.S>
+strong_alias (memset, __memset_generic)

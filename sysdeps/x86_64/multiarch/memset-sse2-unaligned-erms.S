@@ -29,6 +29,7 @@
 #  undef libc_hidden_builtin_def
 #  define libc_hidden_builtin_def(name)
 # endif
+strong_alias (__memset_sse2_unaligned, __memset_generic)
 
 # undef weak_alias
 # define weak_alias(original, alias)

@@ -31,3 +31,8 @@ weak_alias (__mempcpy, mempcpy)
 compat_symbol (libc, __memmove_sse2_unaligned, memcpy, GLIBC_2_2_5);
 # endif
 #endif
+
+#ifndef SHARED
+strong_alias (__mempcpy_sse2_unaligned, __memcpy_generic)
+strong_alias (__memmove_sse2_unaligned, __memmove_generic)
+#endif

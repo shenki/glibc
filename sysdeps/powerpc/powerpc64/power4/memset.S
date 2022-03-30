@@ -237,3 +237,4 @@ L(medium_28t):
 	blr
 END_GEN_TB (MEMSET,TB_TOCLESS)
 libc_hidden_builtin_def (memset)
+strong_alias (memset, __memset_generic)

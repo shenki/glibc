@@ -26,3 +26,4 @@
 #endif
 
 #include <sysdeps/powerpc/powerpc64/memset.S>
+strong_alias (memset, __memset_generic)

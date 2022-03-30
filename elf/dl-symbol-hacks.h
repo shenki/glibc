@@ -1,5 +1,5 @@
-/* Default SPARC64 memset implementation.
-   Copyright (C) 2017-2022 Free Software Foundation, Inc.
+/* Symbol rediretion for loader/static initialization code.
+   Copyright (C) 2022 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -16,15 +16,14 @@
    License along with the GNU C Library; if not, see
    <https://www.gnu.org/licenses/>.  */
 
-#if IS_IN (libc)
-# include <sysdep.h>
+#ifndef _DL_SYMBOL_HACKS_H
+#define _DL_SYMBOL_HACKS_H
 
-# undef libc_hidden_builtin_def
-# define libc_hidden_builtin_def(name)
-# undef weak_alias
-# define weak_alias(x, y)
-
-# define memset  __memset_ultra1
-# include <sysdeps/sparc/sparc64/memset.S>
+/* Some compiler optimizations may transform loops into memset/memmove
+   calls and without proper redirection it might call PLT throught
+   ifunc without relocations being processed.  */
+#ifndef SHARED
+asm ("memset = __memset_generic");
 #endif
-strong_alias (__memset_ultra1, __memset_generic)
+
+#endif

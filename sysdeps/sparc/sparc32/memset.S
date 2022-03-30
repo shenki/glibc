@@ -142,4 +142,5 @@ ENTRY(memset)
 	b		4b
 	 sub		%o0, %o2, %o0
 END(memset)
+strong_alias (memset, __memset_generic)
 libc_hidden_builtin_def (memset)

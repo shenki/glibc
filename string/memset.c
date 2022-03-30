@@ -88,3 +88,4 @@ MEMSET (void *dstpp, int c, size_t len)
   return dstpp;
 }
 libc_hidden_builtin_def (MEMSET)
+strong_alias (MEMSET, __memset_generic)

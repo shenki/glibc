@@ -147,6 +147,7 @@ test_main (void)
 #define libc_hidden_builtin_def(X)
 #define libc_hidden_def(X)
 #define libc_hidden_weak(X)
+#define strong_alias(X,Y)
 #define weak_alias(X,Y)
 #ifndef WIDE
 # undef MEMSET
