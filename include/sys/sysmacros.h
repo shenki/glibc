@@ -25,9 +25,12 @@
 #if !defined _SYS_SYSMACROS_H_WRAPPER && !defined _ISOMAC
 # define _SYS_SYSMACROS_H_WRAPPER 1
 
-libc_hidden_proto (gnu_dev_major)
-libc_hidden_proto (gnu_dev_minor)
-libc_hidden_proto (gnu_dev_makedev)
+__typeof (gnu_dev_major) __gnu_dev_major;
+libc_hidden_proto (__gnu_dev_major)
+__typeof (gnu_dev_minor) __gnu_dev_minor;
+libc_hidden_proto (__gnu_dev_minor)
+__typeof (gnu_dev_makedev) __gnu_dev_makedev;
+libc_hidden_proto (__gnu_dev_makedev)
 
 # undef __SYSMACROS_DECL_TEMPL
 # define __SYSMACROS_DECL_TEMPL(rtype, name, proto)	\
@@ -47,6 +50,13 @@ __SYSMACROS_DECLARE_MAKEDEV (__SYSMACROS_DECL_TEMPL)
 __SYSMACROS_DEFINE_MAJOR (__SYSMACROS_IMPL_TEMPL)
 __SYSMACROS_DEFINE_MINOR (__SYSMACROS_IMPL_TEMPL)
 __SYSMACROS_DEFINE_MAKEDEV (__SYSMACROS_IMPL_TEMPL)
+# elif IS_IN (libc)
+#  undef major
+#  define major(dev) __gnu_dev_major (dev)
+#  undef minor
+#  define minor(dev) __gnu_dev_minor (dev)
+#  undef makedev
+#  define makedev(maj, min) __gnu_dev_makedev (maj, min)
 # endif
 
 #endif
