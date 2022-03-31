@@ -143,6 +143,12 @@ libc_hidden_proto (__ptsname_r)
 libc_hidden_proto (grantpt)
 libc_hidden_proto (unlockpt)
 
+__typeof (bsearch) __bsearch;
+libc_hidden_proto (__bsearch)
+#if !defined __USE_EXTERN_INLINES && IS_IN(libc)
+# define bsearch __bsearch
+#endif
+
 extern double __strtod_internal (const char *__restrict __nptr,
 				 char **__restrict __endptr, int __group)
      __THROW __nonnull ((1)) __wur;

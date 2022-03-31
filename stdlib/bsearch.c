@@ -19,4 +19,9 @@
 
 #undef  __extern_inline
 #define __extern_inline /* Empty, so we get a normal definition.  */
+#undef bsearch
+#define bsearch __bsearch
 #include <bits/stdlib-bsearch.h>
+#undef bsearch
+libc_hidden_def (__bsearch)
+weak_alias (__bsearch, bsearch)
