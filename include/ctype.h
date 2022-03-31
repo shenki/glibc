@@ -50,6 +50,11 @@ __ctype_tolower_loc (void)
   return __libc_tsd_address (const int32_t *, CTYPE_TOLOWER);
 }
 
+__typeof (tolower) __tolower;
+libc_hidden_proto (__tolower)
+__typeof (tolower) __toupper;
+libc_hidden_proto (__toupper)
+
 #  ifndef __NO_CTYPE
 /* The spec says that isdigit must only match the decimal digits.  We
    can check this without a memory access.  */
@@ -60,6 +65,13 @@ __ctype_tolower_loc (void)
 #   undef __isdigit_l
 #   define __isdigit_l(c, l) ({ int __c = (c); __c >= '0' && __c <= '9'; })
 #  endif  /* Not __NO_CTYPE.  */
+
+# ifndef __USE_EXTERN_INLINES
+#  undef tolower
+#  define tolower(c) __tolower (c)
+#  undef toupper
+#  define toupper(c) __toupper (c)
+# endif
 
 # endif	/* IS_IN (libc).  */
 #endif  /* Not _ISOMAC.  */
