@@ -217,7 +217,7 @@ token (void)
 	int c;
 	int i;
 
-	if (feof_unlocked(cfile) || __ferror_unlocked(cfile))
+	if (__feof_unlocked(cfile) || __ferror_unlocked(cfile))
 		return (0);
 	while ((c = __getc_unlocked(cfile)) != EOF &&
 	    (c == '\n' || c == '\t' || c == ' ' || c == ','))

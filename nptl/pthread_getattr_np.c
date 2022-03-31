@@ -117,7 +117,7 @@ __pthread_getattr_np (pthread_t thread_id, pthread_attr_t *attr)
 	      uintptr_t last_to = 0;
 #endif
 
-	      while (! feof_unlocked (fp))
+	      while (! __feof_unlocked (fp))
 		{
 		  if (__getline (&line, &linelen, fp) <= 0)
 		    break;
