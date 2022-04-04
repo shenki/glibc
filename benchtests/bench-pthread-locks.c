@@ -61,8 +61,12 @@ typedef timing_t (*test_t)(long, int);
    total time each test iteration takes, so as to not swamp the useful
    timings.  */
 
-#pragma GCC push_options
-#pragma GCC optimize(1)
+#ifdef __clang__
+# pragma clang optimize off
+#else
+# pragma GCC push_options
+# pragma GCC optimize(1)
+#endif
 
 static int __attribute__((noinline))
 fibonacci (int i)
@@ -81,7 +85,11 @@ do_filler (void)
   memcpy (buf1, buf2, f);
 }
 
-#pragma GCC pop_options
+#ifdef __clang__
+# pragma clang optimize on
+#else
+# pragma GCC pop_options
+#endif
 
 static timing_t
 test_mutex (long iters, int filler)

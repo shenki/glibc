@@ -16,6 +16,8 @@
    License along with the GNU C Library; if not, see
    <https://www.gnu.org/licenses/>.  */
 
+#include <libc-diag.h>
+
 #define TEST_MAIN
 #ifndef WIDE
 # ifdef USE_FOR_STRCHRNUL
@@ -98,7 +100,7 @@ do_one_rand_plus_branch_test (json_ctx_t *json_ctx, impl_t *impl,
                               const CHAR *s, const CHAR *c)
 {
   size_t i, iters = INNER_LOOP_ITERS_LARGE;
-  int must_execute = 0;
+  volatile int must_execute = 0;
   timing_t start, stop, cur;
   TIMING_NOW (start);
   for (i = 0; i < iters; ++i)
@@ -163,7 +165,12 @@ do_rand_test (json_ctx_t *json_ctx, size_t align, size_t pos, size_t len,
   buf[align + len] = 0;
   buf[align + pos] = 1;
 
+  /* clang warns that converting from int to float (upper_bound) changes value
+     from 2147483647 to 2147483648.  It does not matter in tests below.  */
+  DIAG_PUSH_NEEDS_COMMENT_CLANG;
+  DIAG_IGNORE_NEEDS_COMMENT_CLANG (13, "-Wimplicit-const-int-float-conversion");
   perc_zero_int = perc_zero * RAND_MAX;
+  DIAG_POP_NEEDS_COMMENT_CLANG;
   for (i = 0; i < NUM_SEARCH_CHARS; ++i)
     {
       if (rand () > perc_zero_int)

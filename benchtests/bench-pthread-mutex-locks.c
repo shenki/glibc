@@ -37,8 +37,12 @@ static pthread_barrier_t barrier;
 
 #define START_ITERS 1000
 
-#pragma GCC push_options
-#pragma GCC optimize(1)
+#ifdef __clang__
+# pragma clang optimize off
+#else
+# pragma GCC push_options
+# pragma GCC optimize(1)
+#endif
 
 static int __attribute__ ((noinline)) fibonacci (int i)
 {
@@ -64,7 +68,11 @@ do_filler_shared (void)
   memcpy (buf1, buf2, f);
 }
 
-#pragma GCC pop_options
+#ifdef __clang__
+# pragma clang optimize on
+#else
+# pragma GCC pop_options
+#endif
 
 #define UNIT_WORK_CRT do_filler_shared ()
 #define UNIT_WORK_NON_CRT do_filler ()

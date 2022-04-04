@@ -26,6 +26,7 @@
 #include <sys/time.h>
 #include <sys/resource.h>
 #include <unistd.h>
+#include <libc-diag.h>
 
 #include "bench-timing.h"
 #include "json-lib.h"
@@ -63,7 +64,12 @@ get_block_size (unsigned int rand_data)
   float min_pow = powf (dist_min, exponent + 1);
   float max_pow = powf (dist_max, exponent + 1);
 
+  /* clang warns that converting from int to float (upper_bound) changes value
+     from 2147483647 to 2147483648.  It does not matter in tests below.  */
+  DIAG_PUSH_NEEDS_COMMENT_CLANG;
+  DIAG_IGNORE_NEEDS_COMMENT_CLANG (13, "-Wimplicit-const-int-float-conversion");
   float r = (float) rand_data / RAND_MAX;
+  DIAG_POP_NEEDS_COMMENT_CLANG;
 
   return (unsigned int) powf ((max_pow - min_pow) * r + min_pow,
 			      1 / (exponent + 1));
