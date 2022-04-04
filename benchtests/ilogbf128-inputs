@@ -3,8 +3,8 @@
 ## includes: math.h
 
 ## name: subnormal
-6.47517511943802511092443895822764655e-4966f128
-0x1.fffffffffffffff8p-16383f128
+6.47517511943802511092443895822764655e-4966q
+0x1.fffffffffffffff8p-16383q
 
 ## name: normal
 1.0
