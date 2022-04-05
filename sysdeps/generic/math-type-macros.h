@@ -109,7 +109,7 @@
 
 /* Helper macros for commonly used functions.  */
 #define M_COPYSIGN M_SUF (copysign)
-#define M_FABS M_SUF (fabs)
+#define M_FABS M_SUF (__fabs)
 #define M_SINCOS M_SUF (__sincos)
 #define M_SCALBN M_SUF (__scalbn)
 #define M_LOG1P M_SUF (__log1p)

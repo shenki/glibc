@@ -123,11 +123,13 @@ __isinff128 (_Float128 x)
 }
 #  endif
 
+#  ifdef __USE_EXTERN_INLINES
 extern inline _Float128
-fabsf128 (_Float128 x)
+__fabsf128 (_Float128 x)
 {
   return __builtin_fabsf128 (x);
 }
+#  endif
 # endif
 
 # if !(defined __FINITE_MATH_ONLY__ && __FINITE_MATH_ONLY__ > 0)

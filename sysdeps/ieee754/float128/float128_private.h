@@ -336,7 +336,7 @@
 #define erfl erff128
 #define expl expf128
 #define expm1l expm1f128
-#define fabsl fabsf128
+#define fabsl __fabsf128
 #define fdiml fdimf128
 #define finitel finitef128_do_not_use
 #define floorl floorf128
