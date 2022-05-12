@@ -17,17 +17,11 @@
    <https://www.gnu.org/licenses/>.  */
 
 #include <array_length.h>
-#include <errno.h>
 #include <getopt.h>
-#include <limits.h>
-#include <inttypes.h>
-#include <string.h>
 #include <stdlib.h>
 #include <support/capture_subprocess.h>
-#include <support/check.h>
-#include <support/xstdio.h>
 #include <support/support.h>
-#include <sys/auxv.h>
+#include <tst-audit25.h>
 
 static int restart;
 #define CMDLINE_OPTIONS \
@@ -82,13 +76,17 @@ do_test (int argc, char *argv[])
     /* tst-audit25a is build with -Wl,-z,lazy and tst-audit25mod1 with
        -Wl,-z,now; so only tst_audit25mod3_func1 should be expected to
        have LA_SYMB_NOPLTENTER | LA_SYMB_NOPLTEXIT.  */
-    TEST_COMPARE_STRING (result.err.buffer,
-			 "la_symbind: tst_audit25mod3_func1 1\n"
-			 "la_symbind: tst_audit25mod1_func1 0\n"
-			 "la_symbind: tst_audit25mod1_func2 0\n"
-			 "la_symbind: tst_audit25mod2_func1 0\n"
-			 "la_symbind: tst_audit25mod4_func1 0\n"
-			 "la_symbind: tst_audit25mod2_func2 0\n");
+    const char *expected[] = {
+      "la_symbind: tst_audit25mod3_func1 1\n",
+      "la_symbind: tst_audit25mod1_func1 0\n",
+      "la_symbind: tst_audit25mod1_func2 0\n",
+      "la_symbind: tst_audit25mod2_func1 0\n",
+      "la_symbind: tst_audit25mod4_func1 0\n",
+      "la_symbind: tst_audit25mod2_func2 0\n"
+    };
+
+    check_output (result.err.buffer, result.err.length,
+		  expected, array_length (expected));
 
     support_capture_subprocess_free (&result);
   }
@@ -101,15 +99,17 @@ do_test (int argc, char *argv[])
 				      sc_allow_stderr);
 
     /* With LD_BIND_NOW all symbols are expected to have
-       LA_SYMB_NOPLTENTER | LA_SYMB_NOPLTEXIT.  Also the resolution
-       order is done in breadth-first order.  */
-    TEST_COMPARE_STRING (result.err.buffer,
-			 "la_symbind: tst_audit25mod4_func1 1\n"
-			 "la_symbind: tst_audit25mod3_func1 1\n"
-			 "la_symbind: tst_audit25mod1_func1 1\n"
-			 "la_symbind: tst_audit25mod2_func1 1\n"
-			 "la_symbind: tst_audit25mod1_func2 1\n"
-			 "la_symbind: tst_audit25mod2_func2 1\n");
+       LA_SYMB_NOPLTENTER | LA_SYMB_NOPLTEXIT.  */
+    const char *expected[] = {
+      "la_symbind: tst_audit25mod4_func1 1\n",
+      "la_symbind: tst_audit25mod3_func1 1\n",
+      "la_symbind: tst_audit25mod1_func1 1\n",
+      "la_symbind: tst_audit25mod2_func1 1\n",
+      "la_symbind: tst_audit25mod1_func2 1\n",
+      "la_symbind: tst_audit25mod2_func2 1\n"
+    };
+    check_output (result.err.buffer, result.err.length,
+		  expected, array_length (expected));
 
     support_capture_subprocess_free (&result);
   }

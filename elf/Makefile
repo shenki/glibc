@@ -2328,9 +2328,7 @@ LDFLAGS-tst-audit24d = -Wl,-z,lazy
 
 $(objpfx)tst-audit25a.out: $(objpfx)tst-auditmod25.so
 $(objpfx)tst-audit25a: $(objpfx)tst-audit25mod1.so \
-		       $(objpfx)tst-audit25mod2.so \
-		       $(objpfx)tst-audit25mod3.so \
-		       $(objpfx)tst-audit25mod4.so
+		       $(objpfx)tst-audit25mod2.so
 LDFLAGS-tst-audit25a = -Wl,-z,lazy
 $(objpfx)tst-audit25mod1.so: $(objpfx)tst-audit25mod3.so
 LDFLAGS-tst-audit25mod1.so = -Wl,-z,now
